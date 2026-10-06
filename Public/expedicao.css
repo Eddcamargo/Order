@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════
+   EXPEDICAO.CSS — Estende o style.css com componentes específicos
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Feedback ── */
+.feedback-box {
+  min-height: 28px;
+  margin: 15px 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+.feedback-success {
+  color: var(--success-glow);
+  background: rgba(26, 116, 49, 0.1);
+  border: 1px solid var(--success-glow);
+  padding: 12px;
+}
+.feedback-error {
+  color: var(--danger-glow);
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid var(--danger-glow);
+  padding: 12px;
+}
+
+/* ── Log de caixas lidas na sessão ── */
+.scan-log-section {
+  margin: 30px 0;
+  padding: 20px;
+  background: var(--bg-input);
+  border: 1px solid var(--accent-border);
+}
+.scan-log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--accent-border);
+}
+.scan-log-title {
+  margin: 0;
+  font-size: 0.95em;
+  letter-spacing: 2px;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.session-count {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.scan-log-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.scan-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-container);
+  border: 1px solid var(--accent-border);
+  font-size: 0.82em;
+  transition: all 0.3s ease;
+}
+.scan-log-entry--new {
+  border-color: var(--success-glow);
+  box-shadow: 0 0 12px rgba(26, 116, 49, 0.4);
+  animation: pulse 0.6s ease;
+}
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.scan-log-barcode {
+  flex: 1;
+  color: var(--text-main);
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.scan-log-time {
+  color: var(--text-muted);
+  font-size: 0.9em;
+  white-space: nowrap;
+  font-family: monospace;
+}
+.scan-log-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 20px;
+}
+
+/* ── Gear Menu (ações por pedido) ── */
+.gear-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.btn-gear {
+  background: transparent;
+  border: 1px solid var(--accent-border);
+  color: var(--text-main);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 0;
+  transition: all 0.2s;
+}
+.btn-gear:hover {
+  background: var(--accent-highlight);
+  color: var(--bg-container);
+  border-color: var(--accent-highlight);
+}
+.gear-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-container);
+  border: 1px solid var(--accent-border);
+  box-shadow: 0 8px 20px var(--shadow);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  margin-top: 4px;
+}
+.gear-menu button {
+  background: transparent;
+  color: var(--text-main);
+  border: none;
+  border-bottom: 1px solid var(--accent-border);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  cursor: pointer;
+  width: 100%;
+  text-transform: none;
+}
+.gear-menu button:last-child { border-bottom: none; }
+.gear-menu button:hover {
+  background: var(--accent-highlight);
+  color: var(--bg-container);
+  box-shadow: none;
+}
+
+/* ── Botão finalizar manualmente ── */
+.btn-finalize-manual {
+  background: transparent;
+  color: var(--success-glow);
+  border: 1px solid var(--success-glow);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  transition: all 0.2s;
+  width: auto;
+}
+.btn-finalize-manual:hover {
+  background: var(--success-glow);
+  color: var(--bg-container);
+  box-shadow: 0 0 10px rgba(26, 116, 49, 0.4);
+}
+
+/* ── Container dos botões de ação no topo ── */
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* ── Ícone do arquivo morto (minimalista) ── */
+.btn-archive-icon {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--accent-border);
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 1.1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 0;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+.btn-archive-icon:hover {
+  background-color: var(--accent-highlight);
+  color: var(--bg-container);
+  border-color: var(--accent-highlight);
+  box-shadow: 0 0 12px var(--accent-highlight);
+  transform: scale(1.05);
+}
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+  .scan-log-list {
+    grid-template-columns: 1fr;
+  }
+  .scan-log-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .header-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,661 @@
+/* style.css - Estética Luxury com Alternância de Temas via Switch Animado */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* ================= VARIÁVEIS DE COR (TEMAS) ================= */
+/* Padrão: MODO ESCURO (Paleta padronizada com novo-pedido.css) */
+:root {
+  --bg-body: #080d14;
+  --bg-container: #0d1b2a;
+  --bg-input: #1b263b;
+  --bg-surface: #1b263b;
+  --text-main: #e0e1dd;
+  --text-muted: #778da9;
+  --accent-border: #415a77;
+  --accent-highlight: #778da9;
+  --success-glow: #1a7431;
+  --danger-glow: #f87171;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --shadow-lg: rgba(0, 0, 0, 0.8);
+
+  /* Cores para Badges e Progresso (Mantidas para compatibilidade com outras telas) */
+  --badge-complete-bg: #14532d;
+  --badge-complete-text: #4ade80;
+  --badge-pending-bg: #713f12;
+  --badge-pending-text: #fef08a;
+  --badge-archive-bg: #334155;
+  --badge-archive-text: #cbd5e1;
+  --progress-track: #1e293b;
+  --progress-fill: #10b981;
+  --row-complete-bg: rgba(20, 83, 45, 0.15);
+  --row-pending-bg: rgba(113, 63, 18, 0.15);
+}
+
+/* Ativado via JavaScript: MODO CLARO (Paleta padronizada com novo-pedido.css) */
+body.light-mode {
+  --bg-body: #f7faff;
+  --bg-container: #edf3fa;
+  --bg-input: #e3ebf5;
+  --bg-surface: #ffffff;
+  --text-main: #2a2d31;
+  --text-muted: #6b84a0;
+  --accent-border: #b2c4d8;
+  --accent-highlight: #6d8fb3;
+  --success-glow: #2e8b57;
+  --danger-glow: #e57373;
+  --shadow: rgba(36, 52, 71, 0.08);
+  --shadow-lg: rgba(36, 52, 71, 0.15);
+
+  /* Cores para Badges e Progresso (Contexto Claro) */
+  --badge-complete-bg: #dcfce7;
+  --badge-complete-text: #15803d;
+  --badge-pending-bg: #fef9c3;
+  --badge-pending-text: #a16207;
+  --badge-archive-bg: #f1f5f9;
+  --badge-archive-text: #475569;
+  --progress-track: #e2e8f0;
+  --progress-fill: #22c55e;
+  --row-complete-bg: #f0fdf4;
+  --row-pending-bg: #fffbeb;
+}
+
+/* ================= CONFIGURAÇÃO GLOBAL E CENTRALIZAÇÃO ================= */
+* {
+  box-sizing: border-box;
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+}
+
+body {
+  font-family: 'Montserrat', 'Segoe UI', sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================= CAIXAS E PAINÉIS CENTRALIZADOS ================= */
+.container,
+.production-container,
+.order-container,
+.dashboard-container,
+.shipping-container {
+  background-color: var(--bg-container);
+  border: 1px solid var(--accent-border);
+  padding: 40px;
+  border-radius: 0px; /* Cantos retos estilo Rolls-Royce */
+  box-shadow: 0 20px 50px var(--shadow);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container { max-width: 500px; text-align: center; }
+.production-container { max-width: 650px; }
+.order-container { max-width: 950px; }
+.dashboard-container, .shipping-container { max-width: 1200px; }
+
+/* ================= DETALHES TIPOGRÁFICOS ================= */
+h1, h2, h3 {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 0;
+  border-bottom: 1px solid var(--accent-border);
+  padding-bottom: 15px;
+  color: var(--text-main);
+}
+
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--accent-border);
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.header-box h1 { border-bottom: none; padding-bottom: 0; }
+
+.subtitle, .user-info {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ================= FORMULÁRIOS E FILTROS ================= */
+.form-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+label, .filter-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.filter-label { display: inline-block; margin: 0; white-space: nowrap; }
+
+input, select {
+  width: 100%;
+  padding: 14px 16px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--accent-border);
+  color: var(--text-main);
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+  outline: none;
+}
+
+input:focus, select:focus {
+  border-color: var(--accent-highlight);
+  box-shadow: 0 0 8px var(--accent-highlight);
+}
+
+/* Seção de Filtros (arquivo.html) */
+.filter-section {
+  margin-bottom: 25px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--accent-border);
+  padding: 16px;
+}
+
+.filter-bar input[type="text"] { flex: 2; min-width: 200px; }
+.filter-bar input[type="date"] { flex: 1; min-width: 130px; padding: 12px; }
+
+/* Zona de Escaneamento (expedicao.html) */
+.scan-zone {
+  background: rgba(0,0,0,0.1);
+  border: 1px dashed var(--accent-border);
+  padding: 30px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.scan-zone label { text-align: center; margin-bottom: 12px; }
+.scan-input-wrapper { display: flex; gap: 10px; }
+
+.scan-input {
+  text-align: center;
+  font-family: monospace;
+  letter-spacing: 2px;
+}
+
+/* ================= BOTÕES PREMIUM ================= */
+button, .btn-primary, .btn-menu, .btn-back, .btn-tool, .btn-archive-link, .btn-refresh {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--text-main);
+  padding: 14px 24px;
+  cursor: pointer;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 0;
+  width: auto;
+}
+
+button { width: 100%; } /* Botões padrão herdam bloco total */
+.scan-input-wrapper button, .filter-bar button { width: auto; }
+
+/* Variações específicas de botões integrados */
+.btn-archive-link { background: var(--bg-input); border-color: var(--accent-border); }
+.btn-refresh { background: rgba(32, 139, 58, 0.1); border-color: var(--accent-border); }
+
+button:hover, .btn-primary:hover, .btn-menu:hover, .btn-tool:hover, .btn-back:hover, .btn-archive-link:hover, .btn-refresh:hover {
+  background-color: var(--text-main);
+  color: var(--bg-container);
+  box-shadow: 0 0 15px var(--accent-highlight);
+}
+
+.menu-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+/* ================= INTERFACES DE TABELAS E HISTÓRICOS ================= */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 25px;
+}
+
+th, td {
+  padding: 16px;
+  border-bottom: 1px solid var(--accent-border);
+  text-align: left;
+  font-size: 0.9em;
+}
+
+th {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75em;
+}
+
+.text-center { text-align: center; }
+
+/* Linhas com destaque por status */
+tr:hover { background-color: rgba(255,255,255,0.02); }
+body.light-mode tr:hover { background-color: rgba(0,0,0,0.02); }
+
+.row-complete { background-color: var(--row-complete-bg) !important; }
+.row-pending { background-color: var(--row-pending-bg) !important; }
+
+/* Estado de carregamento ou sem dados */
+.loading-row td, .no-data {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 30px;
+}
+
+/* ================= BADGES E TAGS EXTRAÍDAS ================= */
+.badge-complete {
+  display: inline-block;
+  background: var(--badge-complete-bg);
+  color: var(--badge-complete-text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-pending {
+  display: inline-block;
+  background: var(--badge-pending-bg);
+  color: var(--badge-pending-text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-archived {
+  display: inline-block;
+  background: var(--badge-archive-bg);
+  color: var(--badge-archive-text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.box-tag {
+  display: inline-block;
+  background: rgba(2, 132, 199, 0.15);
+  color: #38bdf8;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin: 2px 1px;
+  white-space: nowrap;
+  font-family: monospace;
+  border: 1px solid rgba(2, 132, 199, 0.3);
+}
+
+body.light-mode .box-tag {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #bae6fd;
+}
+
+.archive-count {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ================= BARRAS DE PROGRESSO ================= */
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.progress-bar-track, .progress-container {
+  flex: 1;
+  background: var(--progress-track);
+  border-radius: 4px;
+  height: 10px;
+  min-width: 80px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.progress-bar-fill, .progress-bar {
+  height: 100%;
+  background-color: var(--progress-fill);
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Mantendo compatibilidade com a barra alta do painel de saldos antigo se necessário */
+.progress-container { height: 50px; border-radius: 8px; }
+.progress-container .progress-text {
+  position: absolute;
+  width: 100%; top: 0; left: 0; text-align: center;
+  font-size: 11px; line-height: 50px; color: var(--text-main);
+}
+
+/* ================= PAGINAÇÃO SIMPLES ================= */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 25px;
+  font-size: 0.9rem;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  width: auto;
+  background: var(--bg-input);
+  border-color: var(--accent-border);
+}
+
+.pagination button:disabled { opacity: 0.3; cursor: not-allowed; box-shadow: none; }
+.pagination button:disabled:hover { background: transparent; color: var(--text-main); }
+.pagination .page-info { font-weight: 600; letter-spacing: 1px; }
+
+/* ================= OUTROS COMPONENTES DO ARQUIVO ANTERIOR ================= */
+.cards-grid, .balance-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 35px;
+}
+
+.card, .balance-stat {
+  background-color: var(--bg-input);
+  border: 1px solid var(--accent-border);
+  padding: 25px;
+  text-align: center;
+}
+
+.card:hover, .balance-stat:hover { border-color: var(--accent-highlight); }
+
+.card-val, .balance-stat span {
+  display: block;
+  font-size: 2.2em;
+  font-weight: 300;
+  margin-top: 10px;
+  color: var(--text-main);
+}
+
+.hidden { display: none !important; }
+
+/* ================= CHAVEADOR DE TEMA CUSTOMIZADO (UIVERSE) ================= */
+/* Atualizado para espelhar exatamente o novo-pedido.css */
+.theme-switch-wrapper {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+}
+
+.switch {
+  font-size: 15px;
+  position: relative;
+  display: inline-block;
+  width: 4em;
+  height: 2.2em;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #0d1b2a;
+  border: 1px solid var(--accent-border);
+  transition: 0.4s;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2em;
+  width: 1.2em;
+  border-radius: 50%;
+  left: 0.4em;
+  bottom: 0.4em;
+  transition: 0.4s cubic-bezier(0.81, -0.04, 0.38, 1.5);
+  box-shadow: inset 8px -4px 0px 0px #fff;
+}
+
+.switch input:checked + .slider {
+  background-color: #f4f7f5;
+  border-color: #92e6a7;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(1.8em);
+  box-shadow: inset 15px -4px 0px 15px #ffcf48;
+}
+
+.star {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  transition: all 0.4s;
+}
+
+.star_1 { left: 2.5em; top: 0.5em; }
+.star_2 { left: 2.1em; top: 1.2em; }
+.star_3 { left: 3.0em; top: 0.8em; }
+
+.switch input:checked ~ .slider .star {
+  opacity: 0;
+}
+
+.cloud {
+  width: 3.5em;
+  position: absolute;
+  bottom: -1.4em;
+  left: -1.1em;
+  opacity: 0;
+  transition: all 0.4s;
+  font-size: 14px;
+}
+
+.switch input:checked + .slider .cloud {
+  opacity: 1;
+}
+
+/* ================= SAÍDA / LINKS DE RETORNO ================= */
+.exit-row {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn-exit {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--accent-border);
+  padding: 14px 24px;
+  cursor: pointer;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 0;
+}
+
+.btn-exit:hover {
+  background-color: var(--text-main);
+  color: var(--bg-container);
+  box-shadow: 0 0 15px var(--accent-highlight);
+}
+
+/* ================= PROGRESSO DO PEDIDO (PRODUÇÃO) ================= */
+.progress-section {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--accent-border);
+}
+
+body.light-mode .progress-section {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.progress-section-title {
+  font-size: 0.85em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0 0 14px 0;
+}
+
+.progress-order-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.progress-order-label {
+  font-size: 0.95em;
+  color: var(--text-main);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.progress-percent {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--progress-fill);
+  white-space: nowrap;
+}
+
+.progress-counts-text {
+  margin-top: 10px;
+  font-size: 0.8em;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  text-align: right;
+}
+
+/* ================= LOG DE LEITURAS RECENTES (PRODUÇÃO) ================= */
+.scan-log-section {
+  margin-bottom: 25px;
+}
+
+.scan-log-title {
+  font-size: 0.85em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--accent-border);
+  padding-bottom: 10px;
+  margin: 0 0 12px 0;
+}
+
+.scan-log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.scan-log-entry {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--accent-border);
+  font-size: 0.85em;
+}
+
+/* Destaque breve quando uma nova leitura entra no topo da lista */
+.scan-log-entry--new {
+  border-color: var(--success-glow);
+  box-shadow: 0 0 10px rgba(26, 116, 49, 0.3);
+}
+
+.scan-log-label {
+  flex: 1;
+  color: var(--text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scan-log-qty {
+  color: var(--success-glow);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.scan-log-time {
+  color: var(--text-muted);
+  font-size: 0.85em;
+  white-space: nowrap;
+  font-family: monospace;
+}
+

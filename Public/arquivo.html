@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arquivo Morto — Pedidos Entregues</title>
+  <link rel="stylesheet" href="/Public/style.css">
+  <link rel="stylesheet" href="/Public/arquivo.css">
+</head>
+<body>
+
+  <!-- 🌗 SWITCH DE TEMA -->
+  <div class="theme-switch-wrapper">
+    <label class="switch" title="Alternar tema Claro/Escuro">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider">
+        <span class="star star_1"></span>
+        <span class="star star_2"></span>
+        <span class="star star_3"></span>
+        <span class="cloud">☁️</span>
+      </span>
+    </label>
+  </div>
+
+  <div class="archive-container">
+    <div class="header-box">
+      <a href="/Public/order.html" class="btn-exit">⬅ Voltar</a>
+      <h1>🗄️ Pedidos arquivados</h1>
+    </div>
+
+    <!-- BARRA DE FILTROS E PESQUISA -->
+    <div class="filter-section">
+      <div class="filter-bar">
+        <input type="text" id="archive-search" placeholder="🔍 Pesquisar por pedido, cliente, produto..." autocomplete="off">
+        <label class="filter-label">De:</label>
+        <input type="date" id="filter-date-from">
+        <label class="filter-label">Até:</label>
+        <input type="date" id="filter-date-to">
+        <button type="button" id="btn-clear-filter" class="btn-tool">🧹 Limpar</button>
+        <button type="button" id="btn-refresh-archive" class="btn-refresh">🔄 Atualizar</button>
+      </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="archive-feedback" class="feedback-box"></div>
+
+    <!-- CONTADOR -->
+    <div class="archive-header-row">
+      <span id="archive-count" class="archive-count">Carregando...</span>
+    </div>
+
+    <!-- TABELA -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Pedido</th>
+            <th>Cliente</th>
+            <th>Produto</th>
+            <th class="text-center">Caixas</th>
+            <th>Expedição</th>
+            <th>Arquivado em</th>
+            <th class="text-center">PDF</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="archive-tbody">
+          <tr><td colspan="8" class="no-data">Carregando pedidos arquivados...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAGINAÇÃO -->
+    <div class="pagination" id="pagination-controls" style="display:none;">
+      <button id="btn-prev-page">◀ Anterior</button>
+      <span class="page-info" id="page-info">Página 1</span>
+      <button id="btn-next-page">Próxima ▶</button>
+    </div>
+  </div>
+
+  <script src="/Public/arquivo.js"></script>
+  <script>
+    // Toggle de tema
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+      const saved = localStorage.getItem('theme') || 'dark';
+      if (saved === 'light') { document.body.classList.add('light-mode'); toggle.checked = true; }
+      toggle.addEventListener('change', () => {
+        document.body.classList.toggle('light-mode', toggle.checked);
+        localStorage.setItem('theme', toggle.checked ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>

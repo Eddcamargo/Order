@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════════
+   ARQUIVO.CSS — Estende o style.css para a tela de arquivo morto
+   ═══════════════════════════════════════════════════════════ */
+
+.archive-container {
+  max-width: 1300px;
+}
+
+/* ── Feedback ── */
+.feedback-box {
+  min-height: 24px;
+  margin: 10px 0 20px;
+  padding: 0;
+  text-align: center;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+.feedback-success {
+  color: var(--success-glow);
+  background: rgba(26, 116, 49, 0.1);
+  border: 1px solid var(--success-glow);
+  padding: 10px;
+}
+.feedback-error {
+  color: var(--danger-glow);
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid var(--danger-glow);
+  padding: 10px;
+}
+
+/* ── Linha do contador ── */
+.archive-header-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.archive-count {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* ── Ícone de PDF na tabela ── */
+.btn-pdf-icon {
+  background: transparent;
+  border: 1px solid var(--accent-border);
+  color: var(--text-main);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 0;
+  transition: all 0.2s;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.btn-pdf-icon:hover {
+  background: var(--accent-highlight);
+  color: var(--bg-container);
+  border-color: var(--accent-highlight);
+  box-shadow: 0 0 10px var(--accent-highlight);
+}
+
+.btn-pdf-icon:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Gear Menu ── */
+.gear-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-gear {
+  background: transparent;
+  border: 1px solid var(--accent-border);
+  color: var(--text-main);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: 0;
+  transition: all 0.2s;
+  width: auto;
+}
+
+.btn-gear:hover {
+  background: var(--accent-highlight);
+  color: var(--bg-container);
+  border-color: var(--accent-highlight);
+}
+
+.gear-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-container);
+  border: 1px solid var(--accent-border);
+  box-shadow: 0 8px 20px var(--shadow);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  margin-top: 4px;
+}
+
+.gear-menu button {
+  background: transparent;
+  color: var(--text-main);
+  border: none;
+  border-bottom: 1px solid var(--accent-border);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+  cursor: pointer;
+  width: 100%;
+  text-transform: none;
+}
+
+.gear-menu button:last-child { border-bottom: none; }
+
+.gear-menu button:hover {
+  background: var(--accent-highlight);
+  color: var(--bg-container);
+  box-shadow: none;
+}
+
+/* ── Coluna de PDF mais estreita ── */
+.col-pdf {
+  width: 60px;
+  text-align: center;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+  .archive-container {
+    padding: 20px;
+  }
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .filter-bar input[type="text"],
+  .filter-bar input[type="date"] {
+    min-width: 0;
+    width: 100%;
+  }
+}

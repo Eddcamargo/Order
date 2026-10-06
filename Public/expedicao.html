@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expedição — Leitura de Caixas</title>
+  <link rel="stylesheet" href="/Public/style.css">
+  <link rel="stylesheet" href="/Public/expedicao.css">
+</head> 
+<body>
+
+  <!-- 🌗 SWITCH DE TEMA -->
+  <div class="theme-switch-wrapper">
+    <label class="switch" title="Alternar tema Claro/Escuro">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider">
+        <span class="star star_1"></span>
+        <span class="star star_2"></span>
+        <span class="star star_3"></span>
+        <span class="cloud">☁️</span>
+      </span>
+    </label>
+  </div>
+
+  <div class="shipping-container">
+    <div class="header-box">
+      <div class="header-actions">
+        <a href="/Public/order.html" class="btn-exit">⬅ Voltar</a>
+        <a href="/Public/arquivo.html" class="btn-archive-icon" title="Arquivo Morto">🗄️ Arquivo</a>
+      </div>
+      <h1>🚚 Expedição — Leitura de Caixas</h1>
+    </div>
+
+    <!-- ZONA DE LEITURA -->
+    <div class="scan-zone">
+      <label for="shipping-scan-input">ESCANEIE O CÓDIGO DE BARRAS DA CAIXA</label>
+      <div class="scan-input-wrapper">
+        <input type="text" id="shipping-scan-input" class="scan-input" 
+               placeholder="CLT...-ORD...-CX...-QTY..." autocomplete="off" autofocus>
+        <button type="button" id="btn-submit-shipping-scan" class="btn-primary">Registrar</button>
+      </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="shipping-feedback" class="feedback-box"></div>
+
+    <!-- 📋 LOG DE CAIXAS ESCANEADAS NA SESSÃO -->
+    <div class="scan-log-section">
+      <div class="scan-log-header">
+        <h3 class="scan-log-title">📦 Caixas Lidas Nesta Sessão</h3>
+        <span id="session-count" class="session-count">0 caixas</span>
+      </div>
+      <div id="scan-log-list" class="scan-log-list">
+        <div class="scan-log-empty">Nenhuma caixa escaneada ainda nesta sessão.</div>
+      </div>
+    </div>
+
+    <!-- HISTÓRICO AGRUPADO POR PEDIDO -->
+    <h2>📊 Pedidos em Andamento</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Pedido</th>
+            <th>Cliente</th>
+            <th>Produto</th>
+            <th class="text-center">Caixas Lidas</th>
+            <th class="text-center">Progresso</th>
+            <th>Início</th>
+            <th class="text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="shipping-history-tbody">
+          <tr><td colspan="7" class="no-data">Aguardando primeira leitura...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/Public/expedicao.js"></script>
+  <script>
+    // Toggle de tema (Garante que funcione mesmo se o JS principal falhar)
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      if (!toggle) return;
+      const saved = localStorage.getItem('theme') || 'dark';
+      if (saved === 'light') { document.body.classList.add('light-mode'); toggle.checked = true; }
+      toggle.addEventListener('change', () => {
+        document.body.classList.toggle('light-mode', toggle.checked);
+        localStorage.setItem('theme', toggle.checked ? 'light' : 'dark');
+      });
+    })();
+  </script>
+</body>
+</html>

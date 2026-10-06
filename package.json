@@ -1,0 +1,33 @@
+{
+  "name": "manhatam-inventory",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "bin": "server.js",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "bwip-js": "^4.10.2",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pdfkit": "^0.13.0",
+    "sqlite": "^4.1.0",
+    "sqlite3": "^6.0.1"
+  },
+  "overrides": {
+    "tar": "latest"
+  },
+  "pkg": {
+    "scripts": [
+      "server.js"
+    ],
+    "assets": [
+      "Public/**/*",
+      "Loot/**/*",
+      "db.js",
+      "pdfGenerator.js",
+      "node_modules/es-get-iterator/node.js"
+    ]
+  }
+}

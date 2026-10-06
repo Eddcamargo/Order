@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loot — Saída de Lotes (Admin)</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <style>
+    .screen{display:none}.screen.active{display:block}
+    .scan-section{display:none;margin-top:12px}
+    ul{padding-left:18px}
+    .remove-item-btn{margin-left:8px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Loot — Saída de Lotes (Apenas Admin)</h1>
+    <div class="panel">
+      <a class="btn" href="/order">← Voltar ao Order</a>
+    </div>
+
+    <div id="main-screen" class="screen active panel">
+      <h3>Selecionar Pedido Finalizado</h3>
+      <p>Escolha um pedido com status <b>finalizado</b> para iniciar o escaneamento de caixas.</p>
+      <label>Pedido finalizado:
+        <select id="finalizedSelect">
+          <option value="">-- carregando --</option>
+        </select>
+      </label>
+      <div class="actions">
+        <button id="newLotFromOrder">Usar este pedido</button>
+      </div>
+    </div>
+
+    <div id="create-lot-screen" class="screen panel">
+      <h3>Escaneamento de Caixas</h3>
+      <p><b>Pedido:</b> <span id="lotTitle"></span></p>
+
+      <div class="scan-section">
+        <label>Código de barras
+          <input id="codigoInput" placeholder="Escaneie o código e pressione Enter"/>
+        </label>
+      </div>
+
+      <div class="panel">
+        <h4>Itens escaneados</h4>
+        <ul id="scannedItemsList"></ul>
+        <div><b>Total de Caixas:</b> <span id="totalCaixas">0</span></div>
+        <div><b>Peso Total:</b> <span id="pesoTotal">0kg</span></div>
+      </div>
+
+      <div class="actions">
+        <button id="finishLotBtn" class="warn">Finalizar lote</button>
+        <button id="backToMainFromCreateBtn" class="secondary">Cancelar</button>
+      </div>
+      <div id="resultado" class="muted"></div>
+    </div>
+
+    <div id="summary-screen" class="screen panel">
+      <h3>Resumo do Lote</h3>
+      <div id="finalSummaryDetails"></div>
+      <div class="actions">
+        <button id="printReportBtn">Gerar PDF</button>
+        <button id="backToMainBtn" class="secondary">Voltar ao início</button>
+      </div>
+    </div>
+  </div>
+  <script src="/Loot/script.js"></script>
+</body>
+</html>
